@@ -18,7 +18,7 @@ public class FoodModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", length = 20, nullable = false, unique = true)
     private String foodName;
 
     @Column(name = "grams", nullable = false, unique = false)

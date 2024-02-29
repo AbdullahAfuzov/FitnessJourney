@@ -25,7 +25,7 @@ public class UserMetricsModel {
     @Column(name = "age", nullable = false, unique = false)
     private int age;
 
-    @Column(name = "gender", nullable = false, unique = false)
+    @Column(name = "gender", length = 1, nullable = false, unique = false)
     private String gender;
 
     @Column(name = "caloriesBM", nullable = false, unique = false)

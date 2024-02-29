@@ -13,7 +13,7 @@ public class ExerciseModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "exerciseName", nullable = false, unique = true)
+    @Column(name = "exerciseName", length = 20, nullable = false, unique = true)
     private String exerciseName;
 
     @Column(name = "rep", nullable = false, unique = false)

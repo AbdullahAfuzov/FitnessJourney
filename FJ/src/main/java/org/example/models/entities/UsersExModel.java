@@ -16,7 +16,7 @@ public class UsersExModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user-exercise-name", nullable = false, unique = false)
+    @Column(name = "user-exercise-name", length = 20, nullable = false, unique = false)
     private String userExerciseName;
 
     @Column(name = "users-rep", nullable = false, unique = false)
