@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import lombok.AllArgsConstructor;
+import org.example.dto.ExerciseModelDTO;
 import org.example.dto.FoodModelDTO;
 import org.example.models.services.FoodServices;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,11 @@ public class FoodController {
         return ResponseEntity.ok(foods);
     }
 
+    @GetMapping("/getFood")
+    public ResponseEntity<FoodModelDTO> getFood(@RequestParam String name) {
+        return ResponseEntity.ok(foodServices.getFood(name));
+    }
+
    @PostMapping("/addFood")
     public ResponseEntity<FoodModelDTO> addNewFoodController(@RequestBody FoodModelDTO foodModelDTO) {
 
@@ -35,9 +41,9 @@ public class FoodController {
     }
 
     @DeleteMapping("/deleteFood/{foodDel}")
-    public ResponseEntity<?> deleteFoodController(@PathVariable String foodDel) {
+    public ResponseEntity<?> deleteFoodController(@PathVariable int id) {
 
-       foodServices.deleteFood(foodDel);
+       foodServices.deleteFood(id);
        return ResponseEntity.ok("DeleteOK");
     }
 

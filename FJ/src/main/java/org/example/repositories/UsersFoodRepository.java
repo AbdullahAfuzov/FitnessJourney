@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsersFoodRepository extends CrudRepository<UsersFoodModel, Integer> {
 
-    Integer findUsersFoodModelByUsersFoodName(String usersFoodDel);
+    UsersFoodModel findUsersFoodModelByUsersFoodName(String usersFoodDel);
 }
 

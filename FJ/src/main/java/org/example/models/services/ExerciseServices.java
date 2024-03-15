@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -25,13 +26,11 @@ public class ExerciseServices {
         return exerciseModelDTOS;
     }
     public ExerciseModelDTO getExercise(String exerciseName){
-        for (ExerciseModel exerciseModel : exerciseRepository.findAll()) {
-            if (exerciseModel.getExerciseName().equals(exerciseName)){
-                return exerciseMapper.exerciseToExDTO(exerciseModel);
-            }
-        }
-
-        return null;
+       ExerciseModel exerciseModel = exerciseRepository.findExerciseModelByExerciseName(exerciseName);
+       if(exerciseModel == null) {
+           throw new IllegalArgumentException();
+       }
+       return exerciseMapper.exerciseToExDTO(exerciseModel);
     }
 
     public ExerciseModelDTO addNewExercise(ExerciseModelDTO exerciseModelDTO) {
@@ -53,8 +52,7 @@ public class ExerciseServices {
         return exerciseMapper.exerciseToExDTO(exerciseRepository.save(exerciseModel));
     }
 
-    public void deleteExercise(String exNameDel) {
-        Integer id = exerciseRepository.findExerciseModelByExerciseName(exNameDel);
+    public void deleteExercise(int id) {
 
         exerciseRepository.deleteById(id);
     }

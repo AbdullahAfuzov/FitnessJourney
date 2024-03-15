@@ -22,6 +22,11 @@ public class ExerciseController {
         return ResponseEntity.ok(exercises);
     }
 
+    @GetMapping("/getExercise")
+    public ResponseEntity<ExerciseModelDTO> getExercise(@RequestParam String name) {
+        return ResponseEntity.ok(exerciseServices.getExercise(name));
+    }
+
     @PostMapping("/addExercise")
     public ResponseEntity<ExerciseModelDTO> addNewExerciseController(@RequestBody ExerciseModelDTO exerciseModelDTO) {
 
@@ -35,9 +40,9 @@ public class ExerciseController {
     }
 
     @DeleteMapping("/deleteExercise/{exNameDel}")
-    public ResponseEntity<?> deleteExerciseController(@PathVariable String exNameDel) {
+    public ResponseEntity<?> deleteExerciseController(@PathVariable int id) {
 
-        exerciseServices.deleteExercise(exNameDel);
+        exerciseServices.deleteExercise(id);
         return ResponseEntity.ok("DeleteOK");
     }
 }

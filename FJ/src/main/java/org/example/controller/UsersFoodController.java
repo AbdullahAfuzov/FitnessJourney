@@ -23,6 +23,11 @@ public class UsersFoodController {
         return ResponseEntity.ok(foodUsers);
     }
 
+    @GetMapping("/getFoodUsersByName")
+    public ResponseEntity<UsersFoodModelDTO> getFoodUsers(@RequestParam String name) {
+        return ResponseEntity.ok(usersFoodServices.getUsersFood(name));
+    }
+
     @PostMapping("/addFoodUser")
     public ResponseEntity<UsersFoodModelDTO> addNewFoodUsersController(@RequestBody UsersFoodModelDTO usersFoodModelDTO) {
 

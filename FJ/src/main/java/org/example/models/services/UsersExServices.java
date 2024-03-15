@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.example.dto.ExerciseModelDTO;
 import org.example.dto.UsersExModelDTO;
 import org.example.mapper.UsersExMapper;
+import org.example.models.entities.ExerciseModel;
 import org.example.models.entities.UsersExModel;
 import org.example.repositories.UsersExRepository;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,14 @@ public class UsersExServices {
         }
 
         return usersExModelDTOS;
+    }
+
+    public UsersExModelDTO getUserEx(String exerciseName){
+        UsersExModel usersExModel = usersExRepository.findUsersExModelByUserExerciseName(exerciseName);
+        if(usersExModel == null) {
+            throw new IllegalArgumentException();
+        }
+        return usersExMapper.usersExToUsersExDTO(usersExModel);
     }
 
     public UsersExModelDTO addNewExUsers(UsersExModelDTO usersExModelDTO) {

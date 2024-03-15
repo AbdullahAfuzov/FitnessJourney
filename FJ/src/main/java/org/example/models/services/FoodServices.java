@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
 @AllArgsConstructor
 public class FoodServices {
@@ -25,14 +26,13 @@ public class FoodServices {
 
         return foodModelDTOS;
     }
-    public FoodModelDTO getFood(String foodName){
-        for (FoodModel foodModel : foodRepository.findAll()) {
-            if (foodModel.getFoodName().equals(foodName)){
-                return foodMapper.foodToFoodDTO(foodModel);
-            }
-        }
 
-        return null;
+    public FoodModelDTO getFood(String foodName){
+        FoodModel foodModel = foodRepository.findFoodModelByFoodName(foodName);
+        if(foodModel == null) {
+            throw new IllegalArgumentException();
+        }
+        return foodMapper.foodToFoodDTO(foodModel);
     }
 
     public FoodModelDTO addNewFood(FoodModelDTO foodModelDTO) {
@@ -54,8 +54,7 @@ public class FoodServices {
         return foodMapper.foodToFoodDTO(foodRepository.save(foodModel));
     }
 
-    public void deleteFood(String foodDel) {
-        Integer id = foodRepository.findFoodModelByFoodName(foodDel);
+    public void deleteFood(int id) {
 
         foodRepository.deleteById(id);
     }

@@ -5,8 +5,11 @@ import org.example.dto.UserMetricsModelDTO;
 import org.example.mapper.UserMetricsMapper;
 import org.example.models.entities.UserMetricsModel;
 import org.example.repositories.UserMetricsRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +32,13 @@ public class UserMetricsServices {
 
     public UserMetricsModelDTO getUserMetricsById(int id) {
         return userMetricsMapper.userMetricsToUserMetricsDTO(userMetricsRepository.findById(id).orElse(null));
+    }
+
+    public Page<UserMetricsModelDTO> getUserMetricsByGender(String gender, Pageable pageable) {
+
+        Page<UserMetricsModel> userMetricsModels = userMetricsRepository.findUserMetricsModelsByGender(gender, pageable);
+
+        return userMetricsModels.map(userMetricsMapper::userMetricsToUserMetricsDTO);
     }
 
     public UserMetricsModelDTO addNewMetrics(UserMetricsModelDTO userMetricsModelDTO) {
@@ -75,10 +85,9 @@ public class UserMetricsServices {
         }
     }
 
-    public void deleteMetrics(String id) {
+    public void deleteMetrics(int id) {
 
-        Integer metricsId = Integer.parseInt(id);
 
-        userMetricsRepository.deleteById(metricsId);
+        userMetricsRepository.deleteById(id);
     }
 }

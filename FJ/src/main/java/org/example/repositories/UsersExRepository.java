@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsersExRepository extends CrudRepository<UsersExModel, Integer> {
 
-    Integer findUsersExModelByUserExerciseName(String usersExDel);
+   UsersExModel findUsersExModelByUserExerciseName(String usersExDel);
 }
 

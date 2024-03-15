@@ -2,8 +2,10 @@ package org.example.models.services;
 
 import lombok.AllArgsConstructor;
 import org.example.dto.FoodModelDTO;
+import org.example.dto.UsersExModelDTO;
 import org.example.dto.UsersFoodModelDTO;
 import org.example.mapper.UsersFoodMapper;
+import org.example.models.entities.UsersExModel;
 import org.example.models.entities.UsersFoodModel;
 import org.example.repositories.UsersFoodRepository;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,14 @@ public class UsersFoodServices {
         }
 
         return usersFoodModelDTOS;
+    }
+
+    public UsersFoodModelDTO getUsersFood(String foodName){
+        UsersFoodModel usersFoodModel = usersFoodRepository.findUsersFoodModelByUsersFoodName(foodName);
+        if(usersFoodModel == null) {
+            throw new IllegalArgumentException();
+        }
+        return usersFoodMapper.usersFoodToUsersFoodDTO(usersFoodModel);
     }
 
     public UsersFoodModelDTO addNewFoodUsers(UsersFoodModelDTO usersFoodModelDTO) {

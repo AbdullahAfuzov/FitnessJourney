@@ -3,6 +3,9 @@ package org.example.controller;
 import lombok.AllArgsConstructor;
 import org.example.dto.UserMetricsModelDTO;
 import org.example.models.services.UserMetricsServices;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +31,11 @@ public class UserMetricsController {
         return ResponseEntity.ok(userMetricsServices.getUserMetricsById(id));
     }
 
+    public Page<UserMetricsModelDTO> getUserMetricsByGender(@PathVariable String gender, @PageableDefault() Pageable pageable) {
+
+        return userMetricsServices.getUserMetricsByGender(gender, pageable);
+    }
+
     @PostMapping("/addMetrics")
     public ResponseEntity<UserMetricsModelDTO> addNewUserMetricsController(@RequestBody UserMetricsModelDTO userMetricsModelDTO) {
 
@@ -41,10 +49,9 @@ public class UserMetricsController {
     }
 
     @DeleteMapping ("/deleteMetrics/{id}")
-    public ResponseEntity<?> deleteUserMetricsController(@PathVariable String id) {
+    public ResponseEntity<?> deleteUserMetricsController(@PathVariable int id) {
 
         userMetricsServices.deleteMetrics(id);
-
         return ResponseEntity.ok("DeleteOK");
     }
 }

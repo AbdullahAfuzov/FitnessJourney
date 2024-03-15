@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import lombok.AllArgsConstructor;
+import org.example.dto.FoodModelDTO;
 import org.example.dto.UsersExModelDTO;
 import org.example.models.services.UsersExServices;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,11 @@ public class UsersExController {
         List<UsersExModelDTO> exercisesUsers = usersExServices.getExUsers();
 
         return ResponseEntity.ok(exercisesUsers);
+    }
+
+    @GetMapping("/getExUsersByName")
+    public ResponseEntity<UsersExModelDTO> getExUsers(@RequestParam String name) {
+        return ResponseEntity.ok(usersExServices.getUserEx(name));
     }
 
     @PostMapping("/addExUser")
